@@ -19,4 +19,8 @@ Redmine::Plugin.register :redmine_search do
       'cx_youtube'  => '001506635892206311296:-epxehlckx8',
       'cx_scribd'  => '001506635892206311296:mwunsygnuqq'
   }, :partial => 'redmine_search_setting/setting'
+
+  menu :top_menu, :global_search, {:controller => 'global_search', :action => 'index' },
+       :caption => 'Global search'
+
 end
