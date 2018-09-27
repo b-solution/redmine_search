@@ -1,0 +1,5 @@
+gem 'google-api-client'
+gem 'google_search_results'
+gem 'yt', '~> 0.28.0'
+gem 'vimeo'
+gem 'rest-client'

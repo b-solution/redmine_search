@@ -1,0 +1,72 @@
+<div class="container">
+  <%= form_tag '/global_search', id: 'search_form' do %>
+      <%= text_field_tag(:query, params[:query], :size => 80, :maxlength => 255, :required => true) %>
+      <fieldset>
+        <legend>
+          Choices
+        </legend>
+        <%#= radio_button_tag 'website[]', :google, true %> <!-- Google -->
+        <%= radio_button_tag 'website[]', :slideshare, true %> Slideshare
+        <%= radio_button_tag 'website[]', :youtube %> Youtube
+
+        <%= radio_button_tag 'website[]', :vimeo  %> Vimeo
+        <%= radio_button_tag 'website[]', :scribd %> Scribd
+        <%= radio_button_tag 'website[]', :quora %> Quora
+      </fieldset>
+      <%= submit_tag l('label_search') %>
+  <% end %>
+
+
+  <script>
+      var last_research = '';
+
+      function get_google_search(key){
+          var cx = key;
+          var gcse = document.createElement('script');
+          gcse.type = 'text/javascript';
+          gcse.async = true;
+          gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(gcse, s);
+      }
+      $(document).ready(function(){
+
+          $('#search_form').on('submit', function(e){
+              e.preventDefault();
+              query = $('#query').val();
+              website = document.querySelector('input[name="website[]"]:checked').value;
+              if(last_research !== website) {
+                  $('#google_search_field').html("")
+                  $('#google_search_field').html("<gcse:search ></gcse:search>")
+                  last_research = website;
+
+                  if (website == 'vimeo')
+                      get_google_search("<%= Setting.plugin_redmine_search['cx_vimeo'] %>");
+                  else if (website == 'quora')
+                      get_google_search("<%= Setting.plugin_redmine_search['cx_quora'] %>");
+                  else if (website == 'slideshare')
+                      get_google_search("<%= Setting.plugin_redmine_search['cx_slideshare'] %>");
+                  else if (website == 'scribd')
+                      get_google_search("<%= Setting.plugin_redmine_search['cx_scribd'] %>");
+                  else if (website == 'google')
+                      get_google_search("<%= Setting.plugin_redmine_search['cx_google'] %>");
+                  else if (website == 'youtube')
+                      get_google_search("<%= Setting.plugin_redmine_search['cx_youtube'] %>");
+
+                  setTimeout(function () {
+                      $('#google_search_field').find('input').val(query)
+                      $('#google_search_field').find('.gsc-search-button').trigger('click')
+                  }, 1500)
+              }
+              else {
+                  $('#google_search_field').find('input').val(query)
+                  $('#google_search_field').find('.gsc-search-button').trigger('click')
+              }
+          })
+      })
+  </script>
+  <span id="google_search_field" style="left: -99999px;  display: block; position: absolute;">
+  </span>
+
+
+</div>
