@@ -21,6 +21,6 @@ Redmine::Plugin.register :redmine_search do
   }, :partial => 'redmine_search_setting/setting'
 
   menu :top_menu, :global_search, {:controller => 'global_search', :action => 'index' },
-       :caption => 'Global search'
+       :caption => 'Global search', :if => Proc.new { User.current.logged? }
 
 end
