@@ -5,13 +5,14 @@
         <legend>
           Choices
         </legend>
-        <%#= radio_button_tag 'website[]', :google, true %> <!-- Google -->
         <%= radio_button_tag 'website[]', :slideshare, true %> Slideshare
         <%= radio_button_tag 'website[]', :youtube %> Youtube
-
         <%= radio_button_tag 'website[]', :vimeo  %> Vimeo
         <%= radio_button_tag 'website[]', :scribd %> Scribd
         <%= radio_button_tag 'website[]', :quora %> Quora
+        <%= radio_button_tag 'website[]', :linkedin %> LinkedIn
+        <%= radio_button_tag 'website[]', :twitter %> Twitter
+        <%= radio_button_tag 'website[]', :google %> Google Book
       </fieldset>
       <%= submit_tag l('label_search') %>
   <% end %>
@@ -52,6 +53,10 @@
                       get_google_search("<%= Setting.plugin_redmine_search['cx_google'] %>");
                   else if (website == 'youtube')
                       get_google_search("<%= Setting.plugin_redmine_search['cx_youtube'] %>");
+                  else if (website == 'twitter')
+                      get_google_search("<%= Setting.plugin_redmine_search['cx_twitter'] %>");
+                  else if (website == 'linkedin')
+                      get_google_search("<%= Setting.plugin_redmine_search['cx_linkedin'] %>");
 
                   setTimeout(function () {
                       $('#google_search_field').find('input').val(query)
