@@ -2,7 +2,7 @@ Redmine::Plugin.register :redmine_search do
   name 'Redmine Search plugin'
   author 'Bilel KEDIDI'
   description 'Plugin that search contents from different platform(Youtube, Google, Slideshare,...)'
-  version '1.1.0'
+  version '1.2.0'
   url 'https://www.github.com/bilel-kedidi/redmine_search'
   author_url 'https://www.github.com/bilel-kedidi'
 
