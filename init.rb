@@ -17,7 +17,6 @@ Redmine::Plugin.register :redmine_search do
       'cx_scribd'  => '001506635892206311296:mwunsygnuqq'
   }, :partial => 'redmine_search_setting/setting'
 
-  menu :top_menu, :global_search, {:controller => 'global_search', :action => 'index' },
-       :caption => 'HyperSearch', :if => Proc.new { User.current.logged? }
-
+  menu :top_menu, :global_search, {:controller => 'global_search', :action => 'index' }, :caption => 'HyperSearch', :if => Proc.new { User.current.logged? }
+  menu :top_menu, :update,{:controller => 'activities', :action => 'index' }, :caption => 'Updates', :if => Proc.new { User.current.logged? }
 end
