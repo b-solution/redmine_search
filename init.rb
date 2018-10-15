@@ -18,5 +18,11 @@ Redmine::Plugin.register :redmine_search do
   }, :partial => 'redmine_search_setting/setting'
 
   menu :top_menu, :global_search, {:controller => 'global_search', :action => 'index' }, :caption => 'HyperSearch', :if => Proc.new { User.current.logged? }
-  menu :top_menu, :update,{:controller => 'activities', :action => 'index' }, :caption => 'Updates', :if => Proc.new { User.current.logged? }
+  menu :top_menu, :update,{:controller => 'activities', :action => 'index' , params: {show_issues: 1 ,show_changesets: 1 ,
+                                                                                      show_news: 1 ,show_documents: 1 ,
+                                                                                      show_files: 1 ,show_wiki_edits: 1 ,
+                                                                                      show_messages: 1 ,
+                                                                                      show_time_entries: 1}},
+       :caption => 'Updates',
+       :if => Proc.new { User.current.logged? }
 end
