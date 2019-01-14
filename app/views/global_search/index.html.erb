@@ -32,17 +32,16 @@
           s.parentNode.insertBefore(gcse, s);
       }
       $(document).ready(function(){
-
-//          $('#search_form').on('submit', function(e) {
-//              e.preventDefault();
-//          });
           $('input[name="website[]"]').on('change', function(e){
               $('#query').hide();
               $('#submit_form_button').hide();
               website = document.querySelector('input[name="website[]"]:checked').value;
+              console.log('changed' + website)
               if(last_research !== website) {
+                  console.log('changed---' + website)
                   $('#google_search_field').html("<gcse:search ></gcse:search>")
                   last_research = website;
+                  $('#google_search_field').show()
                   switch(website)
                   {
                       case 'vimeo': get_google_search("<%= Setting.plugin_redmine_search['cx_vimeo'] %>"); break;
